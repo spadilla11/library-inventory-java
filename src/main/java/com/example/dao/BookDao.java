@@ -9,24 +9,24 @@ import java.util.Optional;
 
 public class BookDao {
     // CREATE
-    public int create(Book student) {
-        String sql = "INSERT INTO books (title, author) VALUES (?, ?, ?) RETURNING id";
+    public int create(Book book) {
+        String sql = "INSERT INTO books (title, author) VALUES (?, ?) RETURNING id";
 
         try (Connection conn = Db.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, student.gettitle());
-            ps.setString(2, student.getauthor());
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
 
             try (ResultSet rs = ps.executeQuery()) {
                 rs.next();
                 int id = rs.getInt("id");
-                student.setId(id);
+                book.setId(id);
                 return id;
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error creating Student", e);
+            throw new RuntimeException("Error creating Book", e);
         }
     }
 
@@ -45,7 +45,7 @@ public class BookDao {
             return results;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error reading students", e);
+            throw new RuntimeException("Error reading books", e);
         }
     }
 
@@ -64,7 +64,7 @@ public class BookDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding Student by id", e);
+            throw new RuntimeException("Error finding Book by id", e);
         }
     }
 
@@ -81,7 +81,7 @@ public class BookDao {
             return rows == 1;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error updating Student", e);
+            throw new RuntimeException("Error updating Book", e);
         }
     }
 

@@ -10,13 +10,13 @@ import java.util.Optional;
 public class MemberDao {
     // CREATE
     public int create(Member member) {
-        String sql = "INSERT INTO members (name, email) VALUES (?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO members (name, email) VALUES (?, ?) RETURNING id";
 
         try (Connection conn = Db.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, member.getname());
-            ps.setString(3, member.getemail());
+            ps.setString(1, member.getName());
+            ps.setString(2, member.getEmail());
 
             try (ResultSet rs = ps.executeQuery()) {
                 rs.next();
@@ -45,7 +45,7 @@ public class MemberDao {
             return results;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error reading students", e);
+            throw new RuntimeException("Error reading members", e);
         }
     }
 
