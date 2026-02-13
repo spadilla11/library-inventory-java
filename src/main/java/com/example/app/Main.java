@@ -9,36 +9,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-        BookDao bookDao = new BookDao();
-        MemberDao memberDao = new MemberDao();
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Welcome to Book Management System");
-            System.out.print("Would you like to manage Books[b], Members[m] or Quit[q]? ");
-
-            String choice = scanner.nextLine();
-
-
-            if (choice.equals("b")) {
-                manageBooks(bookDao, scanner);
-            }
-            else if (choice.equals("m")) {
-                manageMembers(memberDao, scanner);
-            }
-            else if (choice.equals("q")) {
-                System.out.println("You are leaving the program...BYE");
-                return;
-            }
-            else {
-                System.out.println("Invalid option.");
-            }
-        }
-    }
-
-
     public static void manageBooks(BookDao dao, Scanner scanner) {
 
         System.out.print("Would you like to add[a], view[v], edit[e], or delete[d] a book? ");
@@ -46,7 +16,7 @@ public class Main {
         String choice = scanner.nextLine();
 
 
-        if (choice.equals("a")) { // CREATE
+        if (choice.equals("a")) {
             System.out.print("Enter title: ");
             String title = scanner.nextLine();
 
@@ -74,7 +44,7 @@ public class Main {
             dao.deleteById(id);
             System.out.println("Book deleted.");
         } else {
-            System.out.println("Invalid option.");
+            System.out.println("Invalid input.");
         }
     }
 
@@ -86,7 +56,7 @@ public class Main {
         String choice = scanner.nextLine();
 
 
-        if (choice.equals("a")) { // CREATE
+        if (choice.equals("a")) {
             System.out.print("Enter name: ");
             String name = scanner.nextLine();
 
@@ -118,9 +88,39 @@ public class Main {
             System.out.println("Member deleted.");
         }
         else {
-            System.out.println("Invalid option.");
+            System.out.println("Invalid input.");
         }
     }
+
+    public static void main(String[] args) {
+
+        BookDao bookDao = new BookDao();
+        MemberDao memberDao = new MemberDao();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Welcome to Book Management System");
+            System.out.print("Would you like to manage Books[b], Members[m] or Quit[q]? ");
+
+            String choice = scanner.nextLine();
+
+
+            if (choice.equals("b")) {
+                manageBooks(bookDao, scanner);
+            }
+            else if (choice.equals("m")) {
+                manageMembers(memberDao, scanner);
+            }
+            else if (choice.equals("q")) {
+                System.out.println("You are leaving the program...BYE");
+                return;
+            }
+            else {
+                System.out.println("Invalid input.");
+            }
+        }
+    }
+
 }
 
 
